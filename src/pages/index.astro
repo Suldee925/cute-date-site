@@ -1,5 +1,4 @@
 ﻿---
-import "../styles/global.css";
 ---
 
 <html lang="en">
@@ -7,13 +6,180 @@ import "../styles/global.css";
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>For You</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #fff1f5;
+      }
+
+      main {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+        overflow: hidden;
+      }
+
+      .card {
+        position: relative;
+        width: 100%;
+        max-width: 430px;
+        height: 620px;
+        background: white;
+        border-radius: 32px;
+        box-shadow: 0 24px 70px rgba(0, 0, 0, 0.18);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        overflow: hidden;
+        border: 1px solid #ffd6e3;
+      }
+
+      .flowers {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.55;
+      }
+
+      .flower {
+        position: absolute;
+        font-size: 24px;
+        animation: float 3s ease-in-out infinite;
+      }
+
+      .content {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 24px;
+      }
+
+      .image-box {
+        width: 160px;
+        height: 160px;
+        border-radius: 28px;
+        overflow: hidden;
+        background: #ffe4ee;
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+        margin-bottom: 36px;
+      }
+
+      .image-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 30px;
+        line-height: 1.2;
+        color: #4a1028;
+      }
+
+      .yes-btn {
+        margin-top: 44px;
+        padding: 15px 42px;
+        border: 0;
+        border-radius: 999px;
+        background: #f472b6;
+        color: white;
+        font-weight: 800;
+        font-size: 16px;
+        box-shadow: 0 10px 22px rgba(244, 114, 182, 0.45);
+        cursor: pointer;
+      }
+
+      .yes-btn:active {
+        transform: scale(0.96);
+      }
+
+      .no-btn {
+        position: absolute;
+        z-index: 5;
+        top: 58%;
+        left: 58%;
+        padding: 12px 28px;
+        border: 0;
+        border-radius: 999px;
+        background: #f3e8ff;
+        color: #7e22ce;
+        font-weight: 700;
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+        cursor: pointer;
+        transition: all 0.25s ease;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .accepted {
+        position: relative;
+        z-index: 2;
+        padding: 24px;
+      }
+
+      .heart {
+        font-size: 72px;
+        margin-bottom: 20px;
+      }
+
+      h2 {
+        margin: 0 0 14px;
+        font-size: 38px;
+        color: #db2777;
+      }
+
+      p {
+        margin: 0;
+        font-size: 20px;
+        color: #4a1028;
+      }
+
+      .bounce {
+        margin-top: 36px;
+        font-size: 42px;
+        animation: bounce 1s infinite;
+      }
+
+      @keyframes float {
+        0%, 100% {
+          transform: translateY(0);
+        }
+
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      @keyframes bounce {
+        0%, 100% {
+          transform: translateY(0);
+        }
+
+        50% {
+          transform: translateY(-12px);
+        }
+      }
+    </style>
   </head>
 
   <body>
-    <main class="min-h-screen flex items-center justify-center bg-pink-50 overflow-hidden px-4">
-      <section class="relative w-full max-w-md h-[620px] bg-white rounded-[32px] shadow-2xl flex flex-col items-center justify-center text-center border border-pink-100 overflow-hidden">
-        
-        <div class="absolute inset-0 pointer-events-none opacity-50">
+    <main>
+      <section class="card">
+        <div class="flowers">
           <span class="flower" style="top: 8%; left: 12%;">🌸</span>
           <span class="flower" style="top: 18%; left: 82%;">🌸</span>
           <span class="flower" style="top: 35%; left: 6%;">🌸</span>
@@ -23,49 +189,30 @@ import "../styles/global.css";
           <span class="flower" style="top: 48%; left: 45%;">🌸</span>
         </div>
 
-        <div id="question" class="relative z-10 flex flex-col items-center">
-          <div class="w-36 h-36 rounded-3xl overflow-hidden shadow-md mb-10 bg-pink-100">
-            <img
-              src="/cute.gif"
-              alt="cute"
-              class="w-full h-full object-cover"
-            />
+        <div id="question" class="content">
+          <div class="image-box">
+            <img src="/cute.gif" alt="cute" />
           </div>
 
-          <h1 class="text-3xl font-bold text-pink-950 leading-tight px-6">
-            🌸 Will you go on a date with me? 🌸
-          </h1>
+          <h1>🌸 Will you go on a date with me? 🌸</h1>
 
-          <button
-            id="yesBtn"
-            class="mt-12 px-10 py-4 bg-pink-400 hover:bg-pink-500 text-white rounded-full font-bold shadow-lg transition active:scale-95"
-          >
+          <button id="yesBtn" class="yes-btn">
             YES 💕
           </button>
 
-          <button
-            id="noBtn"
-            class="absolute px-8 py-3 bg-purple-100 text-purple-700 rounded-full font-semibold shadow-md transition-all duration-300"
-            style="top: 58%; left: 58%;"
-          >
+          <button id="noBtn" class="no-btn">
             no... 🐒
           </button>
         </div>
 
-        <div id="accepted" class="relative z-10 hidden px-6">
-          <div class="text-7xl mb-6">💖</div>
+        <div id="accepted" class="accepted hidden">
+          <div class="heart">💖</div>
 
-          <h2 class="text-4xl font-bold text-pink-600 mb-4">
-            Yaaay!
-          </h2>
+          <h2>Yaaay!</h2>
 
-          <p class="text-xl text-pink-950">
-            I knew you would say yes 😌💕
-          </p>
+          <p>I knew you would say yes 😌💕</p>
 
-          <div class="mt-10 text-4xl animate-bounce">
-            🐱 🌸 💗
-          </div>
+          <div class="bounce">🐱 🌸 💗</div>
         </div>
       </section>
     </main>
@@ -93,23 +240,5 @@ import "../styles/global.css";
         accepted.classList.remove("hidden");
       });
     </script>
-
-    <style>
-      .flower {
-        position: absolute;
-        font-size: 24px;
-        animation: float 3s ease-in-out infinite;
-      }
-
-      @keyframes float {
-        0%, 100% {
-          transform: translateY(0);
-        }
-
-        50% {
-          transform: translateY(-10px);
-        }
-      }
-    </style>
   </body>
 </html>

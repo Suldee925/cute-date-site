@@ -9,10 +9,7 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "@astrojs/tailwind": "latest",
-    "astro": "latest",
-    "tailwindcss": "latest",
-    "typescript": "latest"
+    "astro": "latest"
   },
   "devDependencies": {}
 }
