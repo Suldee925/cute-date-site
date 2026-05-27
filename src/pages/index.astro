@@ -15,7 +15,8 @@
       body {
         margin: 0;
         font-family: Arial, sans-serif;
-        background: #fff1f5;
+        background: linear-gradient(135deg, #fff1f5, #ffe4ee);
+        color: #4a1028;
       }
 
       main {
@@ -31,16 +32,17 @@
         position: relative;
         width: 100%;
         max-width: 430px;
-        height: 620px;
-        background: white;
+        min-height: 620px;
+        background: rgba(255, 255, 255, 0.92);
         border-radius: 32px;
-        box-shadow: 0 24px 70px rgba(0, 0, 0, 0.18);
+        box-shadow: 0 24px 70px rgba(219, 39, 119, 0.18);
         display: flex;
         align-items: center;
         justify-content: center;
         text-align: center;
         overflow: hidden;
         border: 1px solid #ffd6e3;
+        padding: 28px;
       }
 
       .flowers {
@@ -56,13 +58,17 @@
         animation: float 3s ease-in-out infinite;
       }
 
-      .content {
+      .screen {
         position: relative;
         z-index: 2;
-        display: flex;
+        width: 100%;
+        display: none;
         flex-direction: column;
         align-items: center;
-        padding: 24px;
+      }
+
+      .screen.active {
+        display: flex;
       }
 
       .image-box {
@@ -72,7 +78,7 @@
         overflow: hidden;
         background: #ffe4ee;
         box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
-        margin-bottom: 36px;
+        margin-bottom: 34px;
       }
 
       .image-box img {
@@ -88,8 +94,22 @@
         color: #4a1028;
       }
 
-      .yes-btn {
-        margin-top: 44px;
+      h2 {
+        margin: 0 0 22px;
+        font-size: 30px;
+        line-height: 1.2;
+        color: #4a1028;
+      }
+
+      p {
+        margin: 0;
+        font-size: 17px;
+        color: #7c2d4a;
+      }
+
+      .yes-btn,
+      .main-btn {
+        margin-top: 36px;
         padding: 15px 42px;
         border: 0;
         border-radius: 999px;
@@ -101,7 +121,8 @@
         cursor: pointer;
       }
 
-      .yes-btn:active {
+      .yes-btn:active,
+      .main-btn:active {
         transform: scale(0.96);
       }
 
@@ -121,37 +142,93 @@
         transition: all 0.25s ease;
       }
 
-      .hidden {
-        display: none;
+      .form {
+        width: 100%;
+        display: grid;
+        gap: 16px;
+        margin-top: 16px;
       }
 
-      .accepted {
-        position: relative;
-        z-index: 2;
-        padding: 24px;
+      label {
+        text-align: left;
+        font-size: 14px;
+        font-weight: 800;
+        color: #7c2d4a;
+      }
+
+      input,
+      select {
+        width: 100%;
+        margin-top: 8px;
+        padding: 14px 16px;
+        border: 1px solid #ffd6e3;
+        border-radius: 18px;
+        outline: none;
+        font-size: 15px;
+        background: #fff7fb;
+        color: #4a1028;
+      }
+
+      input:focus,
+      select:focus {
+        border-color: #f472b6;
+        box-shadow: 0 0 0 4px rgba(244, 114, 182, 0.15);
+      }
+
+      .food-grid {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        margin-top: 12px;
+      }
+
+      .food-btn {
+        border: 1px solid #ffd6e3;
+        background: #fff7fb;
+        border-radius: 22px;
+        padding: 18px 10px;
+        font-size: 15px;
+        font-weight: 800;
+        color: #4a1028;
+        cursor: pointer;
+        box-shadow: 0 8px 18px rgba(219, 39, 119, 0.08);
+      }
+
+      .food-btn span {
+        display: block;
+        font-size: 30px;
+        margin-bottom: 8px;
+      }
+
+      .food-btn.selected {
+        background: #fce7f3;
+        border-color: #f472b6;
+        box-shadow: 0 10px 24px rgba(244, 114, 182, 0.28);
+      }
+
+      .summary {
+        margin-top: 24px;
+        padding: 18px;
+        width: 100%;
+        border-radius: 24px;
+        background: #fff7fb;
+        border: 1px solid #ffd6e3;
+        text-align: left;
+        line-height: 1.8;
+        font-size: 16px;
       }
 
       .heart {
         font-size: 72px;
-        margin-bottom: 20px;
+        margin-bottom: 18px;
       }
 
-      h2 {
-        margin: 0 0 14px;
-        font-size: 38px;
-        color: #db2777;
-      }
-
-      p {
-        margin: 0;
-        font-size: 20px;
-        color: #4a1028;
-      }
-
-      .bounce {
-        margin-top: 36px;
-        font-size: 42px;
-        animation: bounce 1s infinite;
+      .small-note {
+        margin-top: 22px;
+        font-size: 13px;
+        color: #9d5c75;
+        font-style: italic;
       }
 
       @keyframes float {
@@ -164,13 +241,20 @@
         }
       }
 
-      @keyframes bounce {
-        0%, 100% {
-          transform: translateY(0);
+      @media (max-width: 480px) {
+        .card {
+          min-height: 610px;
+          padding: 22px;
         }
 
-        50% {
-          transform: translateY(-12px);
+        h1,
+        h2 {
+          font-size: 27px;
+        }
+
+        .image-box {
+          width: 145px;
+          height: 145px;
         }
       }
     </style>
@@ -189,7 +273,7 @@
           <span class="flower" style="top: 48%; left: 45%;">🌸</span>
         </div>
 
-        <div id="question" class="content">
+        <div id="screen1" class="screen active">
           <div class="image-box">
             <img src="/cute.gif" alt="cute" />
           </div>
@@ -205,23 +289,123 @@
           </button>
         </div>
 
-        <div id="accepted" class="accepted hidden">
+        <div id="screen2" class="screen">
+          <h2>So... when are you free? 🗓️</h2>
+          <p>Pick a day and time.</p>
+
+          <div class="form">
+            <label>
+              Pick a day
+              <input id="dateInput" type="date" />
+            </label>
+
+            <label>
+              What time?
+              <select id="timeInput">
+                <option value="">Select a time...</option>
+                <option value="12:00">12:00 lunch</option>
+                <option value="14:00">14:00 coffee</option>
+                <option value="16:00">16:00 walk</option>
+                <option value="18:00">18:00 dinner</option>
+                <option value="20:00">20:00 movie</option>
+              </select>
+            </label>
+          </div>
+
+          <button id="setDateBtn" class="main-btn">
+            Set the date! 💗
+          </button>
+        </div>
+
+        <div id="screen3" class="screen">
+          <h2>What are we feeling? 🍽️✨</h2>
+          <p>Choose one.</p>
+
+          <div class="food-grid">
+            <button class="food-btn" data-food="Pizza">
+              <span>🍕</span>
+              Pizza
+            </button>
+
+            <button class="food-btn" data-food="Sushi">
+              <span>🍣</span>
+              Sushi
+            </button>
+
+            <button class="food-btn" data-food="Burgers">
+              <span>🍔</span>
+              Burgers
+            </button>
+
+            <button class="food-btn" data-food="Pasta">
+              <span>🍝</span>
+              Pasta
+            </button>
+
+            <button class="food-btn" data-food="Ramen">
+              <span>🍜</span>
+              Ramen
+            </button>
+
+            <button class="food-btn" data-food="Coffee">
+              <span>☕</span>
+              Coffee
+            </button>
+          </div>
+
+          <button id="finishBtn" class="main-btn">
+            Done 💕
+          </button>
+        </div>
+
+        <div id="screen4" class="screen">
           <div class="heart">💖</div>
 
-          <h2>Yaaay!</h2>
+          <h2>Perfect. It's a date.</h2>
 
-          <p>I knew you would say yes 😌💕</p>
+          <div class="summary">
+            <div><b>Day:</b> <span id="finalDate">-</span></div>
+            <div><b>Time:</b> <span id="finalTime">-</span></div>
+            <div><b>Plan:</b> <span id="finalFood">-</span></div>
+          </div>
 
-          <div class="bounce">🐱 🌸 💗</div>
+          <p class="small-note">
+            Screenshot this and send it to me, so I don't forget 😌
+          </p>
         </div>
       </section>
     </main>
 
     <script>
+      const screens = {
+        screen1: document.getElementById("screen1"),
+        screen2: document.getElementById("screen2"),
+        screen3: document.getElementById("screen3"),
+        screen4: document.getElementById("screen4"),
+      };
+
       const noBtn = document.getElementById("noBtn");
       const yesBtn = document.getElementById("yesBtn");
-      const question = document.getElementById("question");
-      const accepted = document.getElementById("accepted");
+      const setDateBtn = document.getElementById("setDateBtn");
+      const finishBtn = document.getElementById("finishBtn");
+
+      const dateInput = document.getElementById("dateInput");
+      const timeInput = document.getElementById("timeInput");
+      const foodButtons = document.querySelectorAll(".food-btn");
+
+      const finalDate = document.getElementById("finalDate");
+      const finalTime = document.getElementById("finalTime");
+      const finalFood = document.getElementById("finalFood");
+
+      let selectedFood = "";
+
+      function showScreen(name) {
+        Object.values(screens).forEach((screen) => {
+          screen.classList.remove("active");
+        });
+
+        screens[name].classList.add("active");
+      }
 
       function moveNoButton() {
         const top = Math.floor(Math.random() * 60) + 15;
@@ -236,8 +420,45 @@
       noBtn.addEventListener("touchstart", moveNoButton);
 
       yesBtn.addEventListener("click", () => {
-        question.classList.add("hidden");
-        accepted.classList.remove("hidden");
+        showScreen("screen2");
+      });
+
+      setDateBtn.addEventListener("click", () => {
+        if (!dateInput.value || !timeInput.value) {
+          alert("Pick a day and time first 💗");
+          return;
+        }
+
+        showScreen("screen3");
+      });
+
+      foodButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          foodButtons.forEach((btn) => btn.classList.remove("selected"));
+          button.classList.add("selected");
+          selectedFood = button.dataset.food;
+        });
+      });
+
+      finishBtn.addEventListener("click", () => {
+        if (!selectedFood) {
+          alert("Choose one plan first 🍽️");
+          return;
+        }
+
+        const plan = {
+          date: dateInput.value,
+          time: timeInput.value,
+          food: selectedFood,
+        };
+
+        localStorage.setItem("datePlan", JSON.stringify(plan));
+
+        finalDate.textContent = plan.date;
+        finalTime.textContent = plan.time;
+        finalFood.textContent = plan.food;
+
+        showScreen("screen4");
       });
     </script>
   </body>
